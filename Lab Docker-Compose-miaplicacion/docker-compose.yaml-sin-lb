@@ -1,0 +1,14 @@
+version: "3"
+services:
+    web:
+       build: .
+       ports:
+           - "4000:80"
+    redis:
+        image: redis
+        ports:
+            - "6379:6379"
+        volumes:
+            - "./data:/data"
+        command: redis-server --appendonly yes
+
