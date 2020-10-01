@@ -1,0 +1,31 @@
+version: '3.0'
+
+services:
+  loadbalancer:
+    image: traefik:1.7
+    command: --docker \
+      --docker.swarmmode \
+      --docker.watch \
+      --web \
+      --loglevel=DEBUG
+    ports:
+      - 80:80
+      - 9090:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      restart_policy:
+        condition: any
+      mode: replicated
+      replicas: 1
+      update_config:
+        delay: 2s
+      placement:
+         constraints: [node.role == manager]
+    networks:
+      - net
+
+networks:
+    net:
+      external: true
+
