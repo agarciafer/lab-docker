@@ -23,3 +23,8 @@ services:
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_PASSWORD: wordpress
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080    
