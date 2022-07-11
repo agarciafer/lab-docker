@@ -1,0 +1,12 @@
+{
+  "bip": "192.168.50.1/24",
+  "ip": "192.168.33.10",
+  "hosts": [
+    "unix:///var/run/docker.sock",
+    "tcp://192.168.33.10:2376"
+  ],
+  "insecure-registries": [
+    "docker1.curso.local:5000"
+  ] 
+}  
+
