@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
 
   # docker1
     config.vm.define "docker1" do |app|
-	config.vm.boot_timeout = 400
+	config.vm.boot_timeout = 600
     app.vm.hostname = "docker1"
     app.vm.network "private_network", ip: "192.168.33.10"
     #app.vm.provision "shell", path: "provision/provision-for-balancer.sh"
@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
 
   # docker2
     config.vm.define "docker2" do |app|
-	config.vm.boot_timeout = 400
+	config.vm.boot_timeout = 600
     app.vm.hostname = "docker2"
     app.vm.network "private_network", ip: "192.168.33.11"
 	#app.vm.provision "shell", path: "provision/provision-for-nginx.sh"
