@@ -1,0 +1,44 @@
+####Procedimiento para montar el entorno jenkins en la mv docker1
+su -
+yum install git unzip dos2unix java-1.8.0-openjdk-devel -y
+cd /
+git clone   https://github.com/agarciafer/lab-docker.git
+
+cd /lab-docker
+unzip tomcat-prod.zip -d /
+unzip tomcat-staging.zip -d /
+
+ls -ld /tomcat*
+chmod 744 /tomcat-prod/bin/*.sh
+chmod 744 /tomcat-staging/bin/*.sh
+
+dos2unix /tomcat-staging/bin/*.sh
+dos2unix /tomcat-prod/bin/*.sh
+
+##Para iniciar la instancia de producción:
+sh /tomcat-prod/bin/startup.sh
+http://192.168.33.10:9090/
+user: admin
+password: admin
+
+
+##Para iniciar la instancia de preproducción:
+sh /tomcat-staging/bin/startup.sh
+http://192.168.33.10:8090/
+user: admin
+password: admin
+
+##Instalar jenkins el la mv docker1:
+wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo --no-check-certificate
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+yum install jenkins -y
+systemctl start jenkins
+systemctl enable jenkins
+systemctl status jenkins
+
+http://192.168.33.10:8080
+
+###Use the following command to print the password on your terminal:
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
+##Selecionamos los pluguins por defecto
